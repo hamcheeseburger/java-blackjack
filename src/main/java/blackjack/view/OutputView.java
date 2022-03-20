@@ -96,26 +96,4 @@ public class OutputView {
         System.out.print(participant.getName() + EXPLAIN_SYMBOL);
         System.out.println(profit);
     }
-//    public static void printGameResult(final List<Player> participants, final int dealerProfit) {
-//        System.out.println("## 최종 수익");
-//        printDealerResult(dealerProfit);
-//        printParticipantsResult(participants);
-//    }
-//
-//    private static void printDealerResult(final int dealerProfit) {
-//        System.out.println("딜러" + EXPLAIN_SYMBOL + dealerProfit);
-//    }
-//
-//    private static void printParticipantsResult(final List<Player> participants) {
-//        participants.forEach(OutputView::printParticipantResult);
-//    }
-//
-//    private static void printParticipantResult(final Player player) {
-//        if (player.isParticipant()) {
-//            Participant participant = (Participant) player;
-//            System.out.print(participant.getName() + EXPLAIN_SYMBOL);
-//            System.out.println(participant.money().profit());
-//        }
-
-//    }
 }

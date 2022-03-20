@@ -1,6 +1,6 @@
 package blackjack;
 
-import blackjack.controller.Blackjack;
+import blackjack.machine.Blackjack;
 
 public class Application {
 

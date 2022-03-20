@@ -1,4 +1,4 @@
-package blackjack.controller;
+package blackjack.machine;
 
 import blackjack.domain.betting.Money;
 import blackjack.domain.card.Deck;
