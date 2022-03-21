@@ -4,7 +4,7 @@ import blackjack.domain.betting.Money;
 import blackjack.domain.card.Deck;
 import blackjack.domain.card.RandomCardGenerator;
 import blackjack.domain.player.*;
-import blackjack.domain.result.ProfitCalculator;
+import blackjack.domain.result.ProfitResult;
 import blackjack.view.InputView;
 import blackjack.view.OutputView;
 
@@ -95,9 +95,7 @@ public class Blackjack {
         OutputView.printFinishParticipantInfo(players.getParticipants());
     }
 
-    private void announcePlayersProfit(final Map<Player, Money> betting, final Player dealer) {
-        Map<Player, Integer> profits = ProfitCalculator.calculateParticipantsProfit(betting, dealer);
-        int dealerProfit = ProfitCalculator.calculateDealerProfit(profits.values());
-        OutputView.printPlayersProfit(profits, dealerProfit);
+    private void announcePlayersProfit(final Map<Player, Money> bettings, final Player dealer) {
+        OutputView.printPlayersProfit(ProfitResult.of(bettings, dealer));
     }
 }

@@ -2,6 +2,7 @@ package blackjack.view;
 
 import blackjack.domain.card.Card;
 import blackjack.domain.player.*;
+import blackjack.domain.result.ProfitResult;
 
 import java.util.List;
 import java.util.Map;
@@ -78,18 +79,19 @@ public class OutputView {
         System.out.println(makePlayerCardInfo(player) + " - 결과:" + player.calculateFinalScore());
     }
 
-    public static void printPlayersProfit(Map<Player, Integer> profits, int dealerProfit) {
+    public static void printPlayersProfit(final ProfitResult profitResult) {
         System.out.println("## 최종 수익");
-        printDealerProfit(dealerProfit);
-        printParticipantsProfit(profits);
+        printDealerProfit(profitResult);
+        printParticipantsProfit(profitResult);
     }
 
-    public static void printDealerProfit(int dealerProfit) {
-        System.out.println("딜러" + EXPLAIN_SYMBOL + dealerProfit);
+    public static void printDealerProfit(final ProfitResult profitResult) {
+        System.out.println("딜러" + EXPLAIN_SYMBOL + profitResult.dealerProfit());
     }
 
-    private static void printParticipantsProfit(Map<Player, Integer> profits) {
-        profits.keySet().forEach(participant -> printParticipantProfit(participant, profits.get(participant)));
+    private static void printParticipantsProfit(ProfitResult profitResult) {
+        profitResult.players()
+                .forEach(participant -> printParticipantProfit(participant, profitResult.profit(participant)));
     }
 
     private static void printParticipantProfit(final Player participant, final int profit) {

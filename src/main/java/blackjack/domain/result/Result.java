@@ -47,7 +47,6 @@ public enum Result {
         if (bothBlackjack(dealer, participant)) {
             return true;
         }
-
         return bothNotBust(dealer, participant) && bothNotBlackjack(dealer, participant) && participant.isSameScore(dealer);
     }
 
