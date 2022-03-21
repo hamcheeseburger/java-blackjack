@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Stack;
 
+import static blackjack.domain.Fixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -57,7 +58,7 @@ public class DeckTest {
     @DisplayName("이미 뽑은 카드는 다시 뽑힐 수 없다.")
     void drawDifferentCard() {
         Deck deck = new Deck(() -> {
-            List<Card> cards = List.of(new Card(Type.CLOVER, Score.KING), new Card(Type.DIAMOND, Score.SIX));
+            List<Card> cards = List.of(SPADE_ACE, SPADE_TWO);
             Stack<Card> bunchOfCards = new Stack<>();
             bunchOfCards.addAll(cards);
             return bunchOfCards;

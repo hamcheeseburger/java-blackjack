@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static blackjack.domain.Fixtures.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -28,9 +29,9 @@ public class CardsTest {
     @DisplayName("카드를 추가하면 관리하는 카드 개수가 늘어난다.")
     void addCard() {
         Cards cards = new Cards();
-        cards.addCard(new Card(Type.SPADE, Score.ACE));
-        cards.addCard(new Card(Type.DIAMOND, Score.TWO));
-        cards.addCard(new Card(Type.CLOVER, Score.THREE));
+        cards.addCard(SPADE_ACE);
+        cards.addCard(SPADE_TWO);
+        cards.addCard(HEART_EIGHT);
 
         assertThat(cards.getCards().size()).isEqualTo(3);
     }
@@ -39,11 +40,10 @@ public class CardsTest {
     @DisplayName("cards의 점수 합을 구한다.")
     void sumCardScore() {
         Cards cards = new Cards();
-        cards.addCard(new Card(Type.SPADE, Score.ACE));
-        cards.addCard(new Card(Type.DIAMOND, Score.TWO));
-        cards.addCard(new Card(Type.CLOVER, Score.THREE));
+        cards.addCard(SPADE_TWO);
+        cards.addCard(HEART_JACK);
 
-        assertThat(cards.calculateScore()).isEqualTo(16);
+        assertThat(cards.calculateScore()).isEqualTo(12);
     }
 
 
@@ -62,14 +62,14 @@ public class CardsTest {
     private static Stream<Arguments> cardOverMaxScore() {
         return Stream.of(
                 Arguments.of(List.of(
-                        new Card(Type.SPADE, Score.EIGHT),
-                        new Card(Type.HEART, Score.EIGHT),
-                        new Card(Type.SPADE, Score.EIGHT)
-                ), 24),
+                        SPADE_KING,
+                        SPADE_EIGHT,
+                        HEART_EIGHT
+                ), 26),
                 Arguments.of(List.of(
-                        new Card(Type.SPADE, Score.EIGHT),
-                        new Card(Type.HEART, Score.NINE),
-                        new Card(Type.SPADE, Score.EIGHT)
+                        SPADE_EIGHT,
+                        HEART_NINE,
+                        HEART_EIGHT
                 ), 25)
         );
     }
@@ -89,19 +89,19 @@ public class CardsTest {
     private static Stream<Arguments> containsAce() {
         return Stream.of(
                 Arguments.of(List.of(
-                        new Card(Type.SPADE, Score.ACE),
-                        new Card(Type.HEART, Score.ACE),
-                        new Card(Type.HEART, Score.NINE)
+                        SPADE_ACE,
+                        HEART_ACE,
+                        HEART_NINE
                 ), 21),
                 Arguments.of(List.of(
-                        new Card(Type.SPADE, Score.ACE),
-                        new Card(Type.HEART, Score.JACK),
-                        new Card(Type.HEART, Score.ACE)
+                        SPADE_ACE,
+                        HEART_JACK,
+                        HEART_ACE
                 ), 12),
                 Arguments.of(List.of(
-                        new Card(Type.SPADE, Score.TWO),
-                        new Card(Type.HEART, Score.EIGHT),
-                        new Card(Type.HEART, Score.ACE)
+                        SPADE_TWO,
+                        HEART_EIGHT,
+                        HEART_ACE
                 ), 21)
 
         );

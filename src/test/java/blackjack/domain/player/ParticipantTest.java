@@ -1,13 +1,12 @@
 package blackjack.domain.player;
 
-import blackjack.domain.betting.Money;
 import blackjack.domain.card.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
+import static blackjack.domain.Fixtures.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -40,9 +39,9 @@ class ParticipantTest {
     void acceptCardWhenNotBurst() {
         Participant participant = new Participant("pobi", name -> true);
 
-        participant.addCard(new Card(Type.CLOVER, Score.TWO));
-        participant.addCard(new Card(Type.SPADE, Score.ACE));
-        participant.addCard(new Card(Type.DIAMOND, Score.NINE));
+        participant.addCard(SPADE_TWO);
+        participant.addCard(SPADE_ACE);
+        participant.addCard(HEART_NINE);
 
         assertThat(participant.acceptableCard()).isEqualTo(true);
     }
@@ -51,9 +50,9 @@ class ParticipantTest {
     @DisplayName("참가자는 Burst가 되면 카드를 받을 수 없다.")
     void notAcceptCardWhenBurst() {
         Participant participant = new Participant("pobi", name -> true);
-        participant.addCard(new Card(Type.DIAMOND, Score.KING));
-        participant.addCard(new Card(Type.DIAMOND, Score.JACK));
-        participant.addCard(new Card(Type.DIAMOND, Score.TWO));
+        participant.addCard(SPADE_KING);
+        participant.addCard(HEART_JACK);
+        participant.addCard(SPADE_TWO);
         assertThat(participant.acceptableCard()).isEqualTo(false);
     }
 

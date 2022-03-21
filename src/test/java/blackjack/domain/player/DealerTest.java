@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static blackjack.domain.Fixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DealerTest {
@@ -18,8 +19,8 @@ class DealerTest {
     @DisplayName("딜러는 시작시 카드를 2장 받는다.")
     void checkParticipantCardSize() {
         Dealer dealer = new Dealer();
-        dealer.addCard(new Card(Type.HEART, Score.SIX));
-        dealer.addCard(new Card(Type.SPADE, Score.TWO));
+        dealer.addCard(HEART_NINE);
+        dealer.addCard(SPADE_TWO);
         assertThat(dealer.getCards().size()).isEqualTo(2);
     }
 
@@ -37,20 +38,12 @@ class DealerTest {
     private static Stream<Arguments> cardListAndAcceptable() {
         return Stream.of(
                 Arguments.of(List.of(
-                        new Card(Type.SPADE, Score.EIGHT),
-                        new Card(Type.HEART, Score.EIGHT)
+                        SPADE_EIGHT,
+                        HEART_EIGHT
                 ), true),
                 Arguments.of(List.of(
-                        new Card(Type.SPADE, Score.EIGHT),
-                        new Card(Type.HEART, Score.NINE)
-                ), false),
-                Arguments.of(List.of(
-                        new Card(Type.SPADE, Score.ACE),
-                        new Card(Type.HEART, Score.FIVE)
-                ), true),
-                Arguments.of(List.of(
-                        new Card(Type.SPADE, Score.ACE),
-                        new Card(Type.HEART, Score.SIX)
+                        SPADE_EIGHT,
+                        HEART_NINE
                 ), false)
         );
     }

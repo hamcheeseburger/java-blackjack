@@ -1,9 +1,6 @@
 package blackjack.domain.player;
 
-import blackjack.domain.betting.Money;
 import blackjack.domain.card.Card;
-import blackjack.domain.card.Score;
-import blackjack.domain.card.Type;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -12,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static blackjack.domain.Fixtures.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class PlayerTest {
@@ -30,17 +28,11 @@ public class PlayerTest {
 
     private static Stream<Arguments> bunchOfCards() {
         return Stream.of(
-                Arguments.of(List.of(new Card(Type.SPADE, Score.ACE),
-                        new Card(Type.SPADE, Score.KING)), true),
-                Arguments.of(List.of(new Card(Type.SPADE, Score.ACE),
-                        new Card(Type.SPADE, Score.JACK)), true),
-                Arguments.of(List.of(new Card(Type.SPADE, Score.ACE),
-                        new Card(Type.SPADE, Score.QUEEN)), true),
-                Arguments.of(List.of(new Card(Type.SPADE, Score.TEN),
-                        new Card(Type.SPADE, Score.NINE),
-                        new Card(Type.SPADE, Score.TWO)), false),
-                Arguments.of(List.of(new Card(Type.SPADE, Score.TEN),
-                        new Card(Type.SPADE, Score.NINE)), false)
+                Arguments.of(List.of(SPADE_ACE, SPADE_KING), true),
+                Arguments.of(List.of(SPADE_ACE, HEART_JACK), true),
+                Arguments.of(List.of(SPADE_ACE, SPADE_QUEEN), true),
+                Arguments.of(List.of(SPADE_KING, HEART_NINE, SPADE_TWO), false),
+                Arguments.of(List.of(SPADE_KING, HEART_NINE), false)
         );
     }
 }
