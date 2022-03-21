@@ -26,19 +26,12 @@ public class Cards {
         }
     }
 
-    public int calculateEndScore() {
-        final int score = calculateScore();
-        if (score <= BLACKJACK_SCORE) {
-            return score;
-        }
-        return calculateDefaultScore();
-    }
-
     public int calculateScore() {
-        if (containsAce()) {
-            return calculateDefaultScore() + ANOTHER_ACE_SCORE;
+        final int score = calculateDefaultScore();
+        if (containsAce() && score + ANOTHER_ACE_SCORE <= BLACKJACK_SCORE) {
+            return score + ANOTHER_ACE_SCORE;
         }
-        return calculateDefaultScore();
+        return score;
     }
 
     private boolean containsAce() {
@@ -53,11 +46,11 @@ public class Cards {
     }
 
     public boolean isBlackjack() {
-        return cards.size() == BLACKJACK_SIZE && calculateEndScore() == BLACKJACK_SCORE;
+        return cards.size() == BLACKJACK_SIZE && calculateScore() == BLACKJACK_SCORE;
     }
 
     public boolean isBust() {
-        return calculateEndScore() > BLACKJACK_SCORE;
+        return calculateScore() > BLACKJACK_SCORE;
     }
 
     public List<Card> getCards() {

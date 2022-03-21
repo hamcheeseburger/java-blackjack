@@ -27,7 +27,7 @@ public abstract class Player {
     public abstract boolean isParticipant();
 
     public int calculateFinalScore() {
-        return cards.calculateEndScore();
+        return cards.calculateScore();
     }
 
     public void addCard(final Card card) {
